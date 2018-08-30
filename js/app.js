@@ -36,8 +36,28 @@ class player{
         this.sprite="images/char-boy.png"
     }
     update(){
-        
+    // To stop player from moving beyond canvas boundary
+        if (this.y > 380) {
+            this.y = 380;
+        }
+
+        if (this.x > 400) {
+            this.x = 400;
+        }
+
+        if (this.x < 0) {
+            this.x = 0;
+        }
+    //To check if player has reached the river
+        if(this.y<0){
+            this.x=200;
+            this.y=380;
+        }
     }
+    render(){
+         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+    
 }
 
 // Now instantiate your objects.
