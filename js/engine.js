@@ -90,6 +90,7 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
+        console.log("1");
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
@@ -152,7 +153,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+       
         player.render();
     }
 

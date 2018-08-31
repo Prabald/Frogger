@@ -18,8 +18,19 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     
-};
+    //to reset bugs' position when they move off canvas
+    if (this.x > 550) {
+        this.x = -100;
+        this.speed = 100 + Math.floor(Math.random() * 512);
+    }
 
+    // Check for collision between player and enemies
+    if (player.x < this.x + 60 && player.x + 37 > this.x && player.y < this.y + 25 && 30 + player.y > this.y) {
+        player.x = 200;
+        player.y = 380;
+    
+    }
+}
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -36,6 +47,7 @@ class Player{
         this.sprite="images/char-boy.png"
     }
     update(){
+        
     // To stop player from moving beyond canvas boundary
         if (this.y > 380) {
             this.y = 380;
@@ -73,17 +85,25 @@ class Player{
             this.y += this.speed + 30;
             break;
          }
+        
     }
+    
     
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let player=new Player();
+let player=new Player(200, 380, 50);
 let allEnemies=[];
+var enemyLocation = [60, 140, 220];
 
-
+for(let position in enemyLocation){
+   
+    let enemy= new Enemy(0, enemyLocation[position], 100 + Math.floor(Math.random() * 512));
+    allEnemies.push(enemy);
+    
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -95,5 +115,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    Player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]);
 });
