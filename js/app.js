@@ -62,6 +62,7 @@ class Player{
         }
     //To check if player has reached the river
         if(this.y<0){
+            alert("Congrats! You crossed the road");
             this.x=200;
             this.y=380;
         }
